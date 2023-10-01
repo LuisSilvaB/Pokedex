@@ -3,7 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Image } from 'react-native'
-import FavoritesScreen from '../screens/Favorites';""
+// * Reemplazamos el Screen por el stack
+// import FavoritesScreen from '../screens/Favorites';""
+import FavoriteNavigation from './FavoriteNavigation';
 import PokedexScreen from '../screens/Pokedex';
 import Account from '../screens/Account';
 
@@ -11,7 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Favorite' component={FavoritesScreen} options={{
+      <Tab.Screen name='Favorite' component={FavoriteNavigation} options={{
           tabBarLabel:"Favoritos", 
           //Usando destructuración hacemos que el navigation controle color y size 
           tabBarIcon: ({color,size}) => { 

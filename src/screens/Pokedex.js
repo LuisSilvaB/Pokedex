@@ -10,6 +10,7 @@ import PokemonList from '../Components/PokemonList'
 
 export default function PokedexScreen() {
   const [pokemons, setPokemons] = useState([]); 
+  const [nextUrl, setNextUrl] = useState(null); 
   console.log(pokemons);
   useEffect(()=>{
     // Funcion anonima autoejecutable
@@ -20,8 +21,9 @@ export default function PokedexScreen() {
 
   const loadPokemons = async() => {
     try {
-      const response = await getPokemonsApi();
-      // console.log(response); 
+      const response = await getPokemonsApi(nextUrl);
+      setNextUrl(response.next); 
+      console.log(response); 
       const pokemonArray = []
       // Repasamos cada uno de los pokemons e obtenemos su url para con ella obtener toda su informacion 
       for await (const pokemon of response.results){
@@ -34,15 +36,15 @@ export default function PokedexScreen() {
           image: pokemonDetails.sprites.other['official-artwork'].front_default, 
         })
       }
-      setPokemons(pokemonArray); 
-    } catch (error) {
+      setPokemons([...pokemons, ...pokemonArray]); 
+    } catch (error) { 
       console.error(error)
     }
   }
 
   return (
     <>
-      <PokemonList pokemons = { pokemons }></PokemonList>
+      <PokemonList pokemons = { pokemons } loadPokemons = { loadPokemons } nextUrl = { nextUrl } ></PokemonList>
     </>
   )
 }

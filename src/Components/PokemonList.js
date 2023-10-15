@@ -3,11 +3,12 @@ import React from 'react'
 
 //component 
 import PokemonCard from './PokemonCard';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PokemonList(props) {
     const { pokemons } = props; 
     return (
-        <>
+        <SafeAreaView>
             <Text>PokemonList</Text>
             <FlatList 
             data={pokemons}
@@ -17,7 +18,7 @@ export default function PokemonList(props) {
             renderItem={({item}) => (<PokemonCard pokemon = {item} ></PokemonCard>)}
             contentContainerStyle = {styles.flatListContentContainer}
             />
-        </>
+        </SafeAreaView>
     )
 }
 

@@ -42,7 +42,7 @@ export default function PokedexScreen() {
 
   return (
     <>
-      <PokemonList pokemons={pokemons}></PokemonList>
+      <PokemonList pokemons = { pokemons }></PokemonList>
     </>
   )
 }

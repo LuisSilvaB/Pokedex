@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, Platform } from 'react-native'
 import React from 'react'
 
 //component 
@@ -7,10 +7,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PokemonList(props) {
     const { pokemons, loadPokemons, nextUrl } = props; 
-
+    console.log(Platform.OS)
     const loadMore = () => {
         loadPokemons(); 
-        console.log('Cargando mas pokemons');
+        // console.log('Cargando mas pokemons');
     } 
     return (
         <SafeAreaView>
@@ -30,7 +30,6 @@ export default function PokemonList(props) {
                         style = {styles.spiner}
                         color={'#AEAE'}
                     />
-                
             }
             />
         </SafeAreaView>
@@ -39,7 +38,8 @@ export default function PokemonList(props) {
 
 const styles = StyleSheet.create({
     flatListContentContainer:{
-        paddingHorizontal:5
+        paddingHorizontal:5,
+        paddingTop: Platform.OS === 'android' ? 30 : 0, 
     }, 
     spiner:{
         marginTop:20, 

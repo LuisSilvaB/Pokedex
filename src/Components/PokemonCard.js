@@ -2,24 +2,27 @@ import React from 'react'
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import getColorByPokemonType from '../utils/getColorByPokemonType';
 
+//Navigation 
+import { useNavigation } from '@react-navigation/native'
+
 //lodash 
 import { capitalize } from 'lodash'
 
 export default function PokemonCard(props) {
     const { pokemon } = props; 
-    console.log(pokemon); 
+    const navigation = useNavigation(); 
     const pokemonColor = getColorByPokemonType(pokemon.type);
-    console.log(pokemonColor);  
     const bgStyles = {backgroundColor: pokemonColor, ...styles.bgStyles}; 
     const goToPokemon = () => {
-        console.log(`Vamos al pokemon ${pokemon.name}`)
-    }
+        // Navigarion solo puede mandar datos planos, nada de funciones. 
+        navigation.navigate('Pokemon', {id: pokemon.id}); 
+    }   
     return (
         <TouchableWithoutFeedback onPress={goToPokemon}>
             <View style={styles.Card}>
                 <View style={styles.spacing}>
                     <View style={bgStyles}>
-                        <Text style={styles.number}>#{`${pokemon.order}`.padStart(3,0)}</Text>
+                        <Text style={styles.number}>#{`${pokemon.id}`.padStart(3,0)}</Text>
                         <Text style={styles.name}>{capitalize(pokemon.name)}</Text>
                         <Image source={{uri:pokemon.image}} style={styles.image}/>
                     </View>
